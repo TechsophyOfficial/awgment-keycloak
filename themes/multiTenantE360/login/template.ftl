@@ -171,14 +171,19 @@
     (function () {
         // Extract realm from URL
         var realmMatch = window.location.pathname.match(/\/realms\/([^/]+)/);
+        console.log(window.location.pathname, location.pathname, 'location')
+        console.log(realmMatch, 'realmMatch')
+        var multiTenantRealm = window.location.pathname.split('/')[3];
+        console.log(multiTenantRealm,'multiTenantRealm')
         var realm = realmMatch ? realmMatch[1] : null;
+
 
         if (!realm) {
             console.error("Realm not found in URL");
             return;
         }
 
-        var jsonUrl = `https://apps-dev.techsophy.com/emp360/${realm}.json`;
+        var jsonUrl = `https://apps-dev.techsophy.com/emp360/${multiTenantRealm}.json`;
 
         function applyBackgrounds(data) {
             var largeScreenLogo = document.getElementById('tenant-logo');
@@ -226,6 +231,7 @@
 
         fetch(jsonUrl)
             .then(response => {
+                console.log(response.json(), 'response')
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
