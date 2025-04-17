@@ -167,29 +167,61 @@
   </div>
  </div>
  
-   <script>
+    <script>
     (function () {
         // Extract realm from URL
+        console.log('window.location', window.location);
         var realmMatch = window.location.pathname.match(/\/realms\/([^/]+)/);
-        console.log(window.location.pathname, location.pathname, 'location')
-        console.log(realmMatch, 'realmMatch')
-        var multiTenantRealm = window.location.pathname.split('/')[3];
-        console.log(multiTenantRealm,'multiTenantRealm')
         var realm = realmMatch ? realmMatch[1] : null;
-
-
+        
         if (!realm) {
             console.error("Realm not found in URL");
             return;
         }
 
-        var jsonUrl = `https://apps-dev.techsophy.com/emp360/${multiTenantRealm}.json`;
+        var jsonUrl;
+        if (window.location.hostname.includes('auth-dev') || window.location.hostname.includes('localhost')) {
+            jsonUrl = "https://apps-dev.techsophy.com/emp360/" + realm + ".json";
+        } else if (window.location.hostname.includes('auth-uat')) {
+            jsonUrl = "https://apps-uat.techsophy.com/emp360/" + realm + ".json";
+        } else {
+            jsonUrl = "https://apps.techsophy.com/emp360/" + realm + ".json";
+        }
 
-        function applyBackgrounds(data) {
-            var largeScreenLogo = document.getElementById('tenant-logo');
-            var smallScreenLogo = document.getElementById('small-screen-tenant-logo');
-            var largeScreenBgDiv = document.querySelector('.welcome');
-            var smallScreenBgDiv = document.querySelector('.login-pf-page');
+        function applyResponsiveBackgrounds(data) {
+            const largeScreenBgDiv = document.querySelector('.welcome');
+            const smallScreenBgDiv = document.querySelector('.login-pf-page');
+
+            if (data && data.keycloakBackgroundImageUrl) {
+                if (largeScreenBgDiv) {
+                    largeScreenBgDiv.style.backgroundImage = window.innerWidth > 1024
+                        ? 'url("' + data.keycloakBackgroundImageUrl + '")'
+                        : "";
+                }
+
+                if (smallScreenBgDiv) {
+                    smallScreenBgDiv.style.backgroundImage = window.innerWidth <= 1024
+                        ? 'url("' + data.keycloakBackgroundImageUrl + '")'
+                        : "";
+                }
+            } else {
+                if (largeScreenBgDiv) {
+                    largeScreenBgDiv.style.backgroundImage = window.innerWidth > 1024
+                        ? "url('${url.resourcesPath}/img/defaultBG.png')"
+                        : "";
+                }
+
+                if (smallScreenBgDiv) {
+                    smallScreenBgDiv.style.backgroundImage = window.innerWidth <= 1024
+                        ? "url('${url.resourcesPath}/img/defaultBG.png')"
+                        : "";
+                }
+            }
+        }
+
+        function applyLogoImages(data) {
+            const largeScreenLogo = document.getElementById('tenant-logo');
+            const smallScreenLogo = document.getElementById('small-screen-tenant-logo');
 
             if (data && data.keycloakLogoUrl) {
                 if (largeScreenLogo) {
@@ -210,43 +242,31 @@
                     smallScreenLogo.alt = realm;
                 }
             }
-
-            if (data && data.keycloakBackgroundImageUrl && largeScreenBgDiv) {
-                largeScreenBgDiv.style.backgroundImage = 'url("' + data.keycloakBackgroundImageUrl + '")';
-            } else if (largeScreenBgDiv) {
-                largeScreenBgDiv.style.backgroundImage = "url('${url.resourcesPath}/img/defaultBG.png')";
-            }
-
-            if (window.innerWidth <= 1024 && smallScreenBgDiv) {
-                if (data && data.keycloakBackgroundImageUrl) {
-                    smallScreenBgDiv.style.backgroundImage = 'url("' + data.keycloakBackgroundImageUrl + '")';
-                } else {
-                    smallScreenBgDiv.style.backgroundImage = "url('${url.resourcesPath}/img/defaultBG.png')";
-                }
-            }
-            if (window.innerWidth > 1024 && smallScreenBgDiv) {
-                smallScreenBgDiv.style.backgroundImage = "";
-            }
         }
 
         fetch(jsonUrl)
             .then(response => {
-                console.log(response.json(), 'response')
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
                 return response.json();
             })
             .then(data => {
-                applyBackgrounds(data);
-                window.addEventListener('resize', () => applyBackgrounds(data));
+                applyLogoImages(data);
+                applyResponsiveBackgrounds(data);
+
+                window.addEventListener('resize', () => applyResponsiveBackgrounds(data));
             })
             .catch(error => {
                 console.error("Error fetching tenant logo/background:", error);
-                applyBackgrounds(null); 
+
+                applyResponsiveBackgrounds(null);
+                applyLogoImages(null);
+
+                window.addEventListener('resize', () => applyResponsiveBackgrounds(null));
             });
     })();
-</script>
+    </script>
 
 
 </body>
