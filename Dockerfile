@@ -14,6 +14,8 @@ COPY themes/kimsE360 /opt/jboss/keycloak/themes/kimsE360
 COPY themes/cybersophy360 /opt/jboss/keycloak/themes/cybersophy360
 COPY themes/multiTenantE360 /opt/jboss/keycloak/themes/multiTenantE360
 COPY themes/FourHealths /opt/jboss/keycloak/themes/FourHealths
+COPY themes/NewChannel360 /opt/jboss/keycloak/themes/NewChannel360
+
 RUN mkdir /opt/jboss/keycloak/standalone/deployments/providers
 COPY standalone/deployments/ts_awgment_user_register_spi.jar /opt/jboss/keycloak/standalone/deployments/ts_awgment_user_register_spi.jar
 COPY standalone/deployments/providers/ /opt/jboss/keycloak/standalone/deployments/providers/
