@@ -43,9 +43,6 @@
             <!-- horizontal line -->
             <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(to right,rgba(255,255,255,0) 0%,rgba(255, 255, 255, 0.75) 50%,rgba(255,255,255,0) 100%);"></div>
     </div>
-    <#--  <#if isRegisterPage>
-        <div style="height:55%;color:white;font-size:1.8rem;font-weight:bolder">Channel 360 gives <br /> your work a clear <br /> <i style="font-family: Times New Roman;font-weight: 400;font-style: Italic;">digital identity.</i></div>
-    </#if>  -->
     <div class="${properties.kcFormCardClass!} form-card">
         <header class="${properties.kcFormHeaderClass!}">
             <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
