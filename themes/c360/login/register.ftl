@@ -1,7 +1,6 @@
-<#assign isRegisterPage = true>
 <#import "template.ftl" as layout>
-<@layout.registrationLayout displayMessage=!messagesPerField.existsError('firstName','lastName','email','username','password','password-confirm')isRegisterPage=true; section>
-   <#if section = "header">
+<@layout.registrationLayout displayMessage=!messagesPerField.existsError('firstName','lastName','email','username','password','password-confirm'); section>
+     <#if section = "header">
         ${msg("registerTitle")} yourself
     <#elseif section = "form">
         <form id="kc-register-form" class="${properties.kcFormClass!}" action="${url.registrationAction}" method="post">

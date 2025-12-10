@@ -1,4 +1,4 @@
-<#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false showAnotherWayIfPresent=true isRegisterPage=false>
+<#macro registrationLayout bodyClass="" displayInfo=false displayMessage=true displayRequiredFields=false showAnotherWayIfPresent=true>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" class="${properties.kcHtmlClass!}">
 
@@ -37,15 +37,15 @@
 </head>
 
 <body class="${properties.kcBodyClass!}" style="height:100vh;width:100vw;margin:0">
-<div class="${properties.kcLoginClass!}" style="height:100%;width:100%;display:flex;justify-content:${isRegisterPage?string('space-around','center')};align-items:center;box-sizing:border-box">
+<div class="${properties.kcLoginClass!}" style="height:100%;width:100%;display:flex;justify-content:center;align-items:center;box-sizing:border-box">
     <div style=" width:100%;position:absolute;top:0;padding-top:1rem;padding-left:2rem;padding-bottom:0.8rem;color:#fff;box-sizing:border-box">
             <span style="font-size:1.3rem;letter-spacing:2px;font-weight:bolder;text-shadow: 0 0 8px rgba(0, 0, 0, 0.66);">CHANNEL <span style="color:#FF8D06;font-weight:bolder">360</span></span>
             <!-- horizontal line -->
             <div style="position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(to right,rgba(255,255,255,0) 0%,rgba(255, 255, 255, 0.75) 50%,rgba(255,255,255,0) 100%);"></div>
     </div>
-    <#if isRegisterPage>
+    <#--  <#if isRegisterPage>
         <div style="height:55%;color:white;font-size:1.8rem;font-weight:bolder">Channel 360 gives <br /> your work a clear <br /> <i style="font-family: Times New Roman;font-weight: 400;font-style: Italic;">digital identity.</i></div>
-    </#if>
+    </#if>  -->
     <div class="${properties.kcFormCardClass!} form-card">
         <header class="${properties.kcFormHeaderClass!}">
             <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
