@@ -16,9 +16,25 @@
   height: 100%;
 }
 
+input {
+  height: 42px !important;
+}
+
+a {
+  color: white;
+  text-decoration: underline;
+  font-size: 14px;
+
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
+}
+
+a:hover {
+  color: #fff !important;
+}
+
 .application-name {
   font-family: Poppins, sans-serif;
-  font-size: 18px;
+  font-size: 24px;
   font-weight: 600;
   font-style: normal;
   line-height: 21px;
@@ -29,7 +45,7 @@
   padding-top: 0px;
   letter-spacing: 1px;
 
-  text-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.6);
 }
 
 @keyframes zoomInOut {
@@ -834,7 +850,10 @@ input[type="submit"].btn-block {
   margin-right: 0;
 }
 .control-label {
-  margin-bottom: 8px !important;
+  margin-bottom: 0 !important;
+  margin-left: 4px !important;
+  color: #747474;
+  font-size: 14px;
 }
 
 .form-control:focus {
@@ -850,7 +869,7 @@ input[type="submit"].btn-block {
 }
 
 #kc-form-wrapper {
-  width: 70%;
+  width: 85%;
 }
 
 #kc-reset-password-form {
@@ -906,7 +925,7 @@ input[type="submit"].btn-block {
   margin-top: 0;
   background: #f5f5fa;
   border: 1px solid #b7b7b7;
-  background: #162952;
+  background: #ff8d06;
   border-radius: 32px;
   border: none;
   color: #fff;
@@ -941,20 +960,6 @@ input[type="submit"].btn-block {
 form#kc-select-back-form div.login-pf-social-section {
   padding-left: 0px;
   border-left: 0px;
-}
-
-@media only screen and (max-width: 1024px) {
-  #usericon {
-    background-image: url(../img/s-usericon.svg);
-    background-repeat: no-repeat;
-    background-position: 10px 8px;
-    margin-bottom: 25px;
-  }
-  #passwordicon {
-    background-image: url(../img/s-passwordicon.svg);
-    background-repeat: no-repeat;
-    background-position: 10px 8px;
-  }
 }
 
 @media only screen and (max-width: 1024px) {

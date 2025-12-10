@@ -24,16 +24,33 @@
         <#if realm.password>
             <form id="kc-form-login" onsubmit="login.disabled = true; return true;" action="${url.loginAction}" method="post">
                 <div class="${properties.kcFormGroupClass!}">
-
+                    <label for="username" class="${properties.kcLabelClass!}">Username or Email</label>
                     <#if usernameEditDisabled??>
-                        <input id="usericon" tabindex="1" placeholder="<#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>" id="username" class="${properties.kcInputClass!}" name="username" value="${(login.username!'')}" type="text" disabled />
-                    <#else>
-                        <input id="usericon" tabindex="1" placeholder="<#if !realm.loginWithEmailAllowed>${msg("username")}<#elseif !realm.registrationEmailAsUsername>${msg("usernameOrEmail")}<#else>${msg("email")}</#if>" id="username" class="${properties.kcInputClass!}" name="username" value="${(login.username!'')}"  type="text" autofocus autocomplete="off" />
-                    </#if>
+    <input id="usericon" 
+           tabindex="1"
+           id="username"
+           class="${properties.kcInputClass!}"
+           name="username"
+           value="${(login.username!'')}"
+           type="text"
+           disabled />
+<#else>
+    <input id="usericon" 
+           tabindex="1"
+           id="username"
+           class="${properties.kcInputClass!}"
+           name="username"
+           value="${(login.username!'')}"
+           type="text"
+           autofocus
+           autocomplete="off" />
+</#if>
+
                 </div>
 
                 <div class="${properties.kcFormGroupClass!}">
-                    <input tabindex="2" id="passwordicon" id="password" placeholder="${msg("password")}" class="${properties.kcInputClass!}" name="password" type="password" autocomplete="off" />
+                <label for="password" class="${properties.kcLabelClass!}">Password</label>
+                    <input tabindex="2" id="passwordicon" id="password" class="${properties.kcInputClass!}" name="password" type="password" autocomplete="off" />
                 </div>
 
                 <div class="${properties.kcFormGroupClass!} ${properties.kcFormSettingClass!}">
