@@ -2,13 +2,13 @@
 
 <@layout.registrationLayout 
     displayMessage=!(messagesPerField.getFirstError('username','password')??)
-    displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??; 
+    displayInfo=realm.password && realm.registrationAllowed && !registrationDisabled??;
 section>
 
-    <#if section = "header">
+    <#if section == "header">
         ${msg("loginAccountTitle")}
 
-    <#elseif section = "form">
+    <#elseif section == "form">
 
     <div id="kc-form">
       <div id="kc-form-wrapper">
@@ -32,6 +32,7 @@ section>
                     </label>
 
                     <#if usernameEditDisabled??>
+
                         <input tabindex="1" id="username" class="${properties.kcInputClass!}"
                                name="username" value="${(login.username!'')}" 
                                type="text" disabled />
@@ -53,7 +54,6 @@ section>
                             </span>
                         </#if>
 
-                    </#else>
                     </#if>
                 </div>
 
@@ -160,7 +160,7 @@ section>
 
     </div>
 
-    <#elseif section = "info">
+    <#elseif section == "info">
 
         <#if realm.password && realm.registrationAllowed && !registrationDisabled??>
             <div id="kc-registration-container">
